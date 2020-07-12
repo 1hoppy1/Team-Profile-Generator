@@ -1,13 +1,8 @@
 {
-  "name": "Team-Profile-Generator",
+  "name": "team-profile-generator",
   "version": "1.0.0",
   "description": "",
   "main": "Index.js",
-  
-  "dependencies": {
-    "jest": "^26.1.0"
-  },
-  "devDependencies": {},
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -19,11 +14,14 @@
     "type": "git",
     "url": "git+https://github.com/1hoppy1/Team-Profile-Generator.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/1hoppy1/Team-Profile-Generator/issues"
   },
-  "homepage": "https://github.com/1hoppy1/Team-Profile-Generator#readme"
+  "homepage": "https://github.com/1hoppy1/Team-Profile-Generator#readme",
+  "dependencies": {
+    "inquirer": "^7.3.1",
+    "jest": "^26.1.0"
+  }
 }
