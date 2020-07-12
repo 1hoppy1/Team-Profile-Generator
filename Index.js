@@ -1,66 +1,108 @@
 const inquirer = require('inquirer');
 let fs = require("fs");
 const { request } = require('http');
-//const readmeTemplate = require('./src/readme-template.md');
-const generateMarkdown = require('./utils/generateMarkdown');
+const generateHTML = require('./src/generateHTML');
+const generateCSS = require('./src/generateCSS');
+const employeeDB = []
+let Id = employeeDB.length+1
 
-const questions = () => {
-    return inquirer.prompt([{
+
+function mainMenu() {
+     inquirer.prompt({
+       type: 'list',
+       name: "selection",
+       choices: ["Create Manager", "Create Engineer", "Create Intern"]
+     }).then(userInput => {
+       switch(userInput.selection){
+         case "Create Manager": 
+         createManager()
+       }
+     })
+}
+
+
+
+//Parent Employee Class Questions
+const employee = () => {
+//Team Manager Class
+    return inquirer.prompt([
+      //Manager Questions
+      {
         type: 'input',
-        name: 'projectTitle',
-        message: 'What is your Project Title?'
+        name: 'teamManagerName',
+        message: 'What is your Team Managers Name?'
       },
       {
         type: 'input',
-        name: 'projectDescription',
-        message: 'Please describe your project.'
+        name: 'teamManagerID',
+        message: 'What is your Team Managers Employee ID?'
       },
       {
         type: 'input',
-        name: 'projectInstall',
-        message: 'Describe how the user will install the Project on their personal computer.'
+        name: 'teamManagerEmail',
+        message: 'What is your Team Managers Email Address?'
       },
       {
         type: 'input',
-        name: 'projectUsage',
-        message: 'Please provide instructions and examples for use.'
+        name: 'teamManagerOfficeNumber',
+        message: 'What is your Team Managers Office Number?'
+      },
+
+    //   const addEmployees = () => {
+    //   //Would you like to add an Engineer, Intern, or are you finished building your team?
+    //   return inquirer.prompt([
+    //   {
+    //     type: 'checkbox',
+    //     name: 'addEmployees',
+    //     message: 'Would you like to add an Engineer, Intern, or are you finished building your team?',
+    //     choices: ['Engineer', 'Intern', 'Finished']
+    //   ])
+    //   }}
+
+      //Engineer Class Input
+      {
+        type: 'input',
+        name: 'engineersName',
+        message: 'Engineers Name?',
       },
       {
         type: 'input',
-        name: 'projectContribution',
-        message: 'Describe your Contribution Guidelines.'
+        name: 'engineersID',
+        message: 'Engineers ID?'
       },
       {
         type: 'input',
-        name: 'projectTest',
-        message: 'Describe how the user will test your code.'
-      },
-      {
-        type: 'checkbox',
-        name: 'projectLicense',
-        message: 'What license are you using?',
-        choices: ['None', 'MIT', 'GPL v3', 'AGPL']
+        name: 'engineersEmail?',
+        message: 'Engineers Email address?'
       },
       {
         type: 'input',
-        name: 'projectLicenseOther',
-        message: 'If using OTHER License, please list Name and description.',
+        name: 'engineersGitHub?',
+        message: 'Engineers GitHub username?'
+      },
+
+      //Intern Class info
+      {
+        type: 'input',
+        name: 'internsName',
+        message: 'Interns Name?',
       },
       {
         type: 'input',
-        name: 'projectGitHub',
-        message: 'What is your GitHub username?'
+        name: 'internsID',
+        message: 'Interns ID?'
       },
       {
         type: 'input',
-        name: 'projectEmail',
-        message: 'What is your Email address?'
+        name: 'internsEmail?',
+        message: 'Interns Email address?'
       },
       {
         type: 'input',
-        name: 'projectCredits',
-        message: 'Who/What would you like to credit?'
+        name: 'internsSchool?',
+        message: 'Interns School?'
       }
+
     ]).then(function(userInput){
     const data = {}
     data.projectTitle = userInput.projectTitle
@@ -76,26 +118,20 @@ const questions = () => {
     data.projectCredits = userInput.projectCredits
 
 
- // function to write README file
+ // function to write HTML/CSS file
  const output = generateMarkdown(data)
  fs.writeFileSync("./dist/index.html", output);
  fs.writeFileSync("./dist/class.css", output);
 
- //let fileName = `AwesomeReadMe`;
- //let data = answers
-    });
+     });
   };
-questions()
-
-
+employee()
 
 
  function writeToFile(fileName, data) {
 
  }
 
-// let output = render(fileName, data)
- 
 
 // function to initialize program
 function init() {
